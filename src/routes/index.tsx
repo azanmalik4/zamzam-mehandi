@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SideNav } from "@/components/site/SideNav";
-import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { Hero } from "@/components/site/Hero";
 import { Products } from "@/components/site/Products";
 import { About } from "@/components/site/About";
@@ -23,7 +22,6 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="relative min-h-screen overflow-x-clip pr-16 sm:pr-20">
-      <ThemeToggle />
       <SideNav />
       <Hero />
       <Products />
