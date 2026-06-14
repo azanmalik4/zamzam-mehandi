@@ -6,6 +6,7 @@ import { About } from "@/components/site/About";
 import { WhyUs } from "@/components/site/WhyUs";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ function Index() {
       <Products />
       <About />
       <WhyUs />
+      <ThemeToggle />
       <Contact />
       <Footer />
     </main>
