@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="relative min-h-screen overflow-x-clip pr-16 sm:pr-20">
+<main className="relative min-h-screen overflow-x-clip">
       <SideNav />
       <Hero />
       <Products />
