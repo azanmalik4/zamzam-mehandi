@@ -47,7 +47,7 @@ export function SideNav() {
                 href={`#${id}`}
                 className={cn(
                   "group relative flex flex-col items-center justify-center rounded-full transition-all",
-                  "h-9 w-9 sm:h-12 sm:w-12",
+                  "h-12 w-9 sm:h-14 sm:w-12",
                   isActive
                     ? "bg-primary text-primary-foreground ring-glow"
                     : "text-muted-foreground hover:text-foreground",
@@ -55,6 +55,7 @@ export function SideNav() {
                 aria-label={label}
               >
                 <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                <span className="text-[8px] font-medium leading-none mt-0.5">{label}</span>
                 <span
                   className={cn(
                     "absolute right-full mr-3 hidden whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium",

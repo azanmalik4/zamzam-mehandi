@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo-1.png";
 
 const particles = Array.from({ length: 14 }).map((_, i) => ({
   id: i,
@@ -44,8 +45,8 @@ export function Hero() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="glass relative z-10 mx-auto w-full max-w-2xl rounded-3xl px-7 py-10 text-center sm:px-12 sm:py-14"
       >
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/40 ring-glow">
-          <Sparkles className="h-6 w-6 text-[color:var(--glow)]" strokeWidth={1.5} />
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl overflow-hidden">
+          <img src={logo} alt="Noor Mehandi Logo" className="h-full w-full object-contain" />
         </div>
 
         <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.35em] text-[color:var(--lavender)]">
@@ -59,11 +60,16 @@ export function Hero() {
         </h1>
 
         <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-          A heritage henna house blending pure ingredients with timeless artistry — for color that lasts and skin that breathes.
+          A heritage henna house blending pure ingredients with timeless artistry — for color that
+          lasts and skin that breathes.
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button asChild size="lg" className="rounded-full bg-primary px-7 text-primary-foreground shadow-[0_10px_40px_-10px_var(--primary)] hover:bg-primary/90">
+          <Button
+            asChild
+            size="lg"
+            className="rounded-full bg-primary px-7 text-primary-foreground shadow-[0_10px_40px_-10px_var(--primary)] hover:bg-primary/90"
+          >
             <a href="#products">Explore Products</a>
           </Button>
           <Button
