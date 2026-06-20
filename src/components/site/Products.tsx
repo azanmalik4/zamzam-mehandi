@@ -8,12 +8,42 @@ import p5 from "@/assets/product-5.jpg";
 import p6 from "@/assets/product-6.jpg";
 
 const products = [
-  { img: p1, name: "Signature Henna Cone", desc: "Hand-rolled cone with rich, lasting stain.", size: "25 g · Single Cone" },
-  { img: p2, name: "Bridal Heritage Cone", desc: "Our deepest, slowest-developing bridal formula.", size: "30 g · Bridal Box" },
-  { img: p3, name: "Organic Henna Powder", desc: "Triple-sifted Rajasthani leaves, lab tested.", size: "100 g · Glass Jar" },
-  { img: p4, name: "Instant Black Mehandi", desc: "Bold black finish in under 15 minutes.", size: "30 ml · Tube" },
-  { img: p5, name: "Herbal Hair Color", desc: "Ammonia-free copper-mahogany hair tint.", size: "150 g · Box" },
-  { img: p6, name: "Luxury Gift Set", desc: "A curated collection in our signature box.", size: "4-piece · Gift Box" },
+  {
+    img: p1,
+    name: "Signature Henna Cone",
+    desc: "Hand-rolled cone with rich, lasting stain.",
+    size: "25 g · Single Cone",
+  },
+  {
+    img: p2,
+    name: "Bridal Heritage Cone",
+    desc: "Our deepest, slowest-developing bridal formula.",
+    size: "30 g · Bridal Box",
+  },
+  {
+    img: p3,
+    name: "Organic Henna Powder",
+    desc: "Triple-sifted Rajasthani leaves, lab tested.",
+    size: "100 g · Glass Jar",
+  },
+  {
+    img: p4,
+    name: "Instant Black Mehandi",
+    desc: "Bold black finish in under 15 minutes.",
+    size: "30 ml · Tube",
+  },
+  {
+    img: p5,
+    name: "Herbal Hair Color",
+    desc: "Ammonia-free copper-mahogany hair tint.",
+    size: "150 g · Box",
+  },
+  {
+    img: p6,
+    name: "Luxury Gift Set",
+    desc: "A curated collection in our signature box.",
+    size: "4-piece · Gift Box",
+  },
 ];
 
 export function Products() {

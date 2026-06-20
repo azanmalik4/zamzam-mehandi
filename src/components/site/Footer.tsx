@@ -2,7 +2,7 @@ import { Sparkles } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="relative px-5 pb-10 pt-6">
+    <footer className="relative px-5 pb-28 pt-6">
       <div className="mx-auto max-w-6xl">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-[color:var(--primary)] to-transparent opacity-60" />
         <div className="mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
