@@ -6,6 +6,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { trackScan } from "../lib/trackScan";
 import "../styles.css";
 
 function NotFoundComponent() {
@@ -76,6 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    trackScan();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
