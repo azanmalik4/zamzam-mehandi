@@ -107,9 +107,7 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
             )}
           />
           {error && (
-            <p className="text-left text-xs text-destructive">
-              Incorrect password. Try again.
-            </p>
+            <p className="text-left text-xs text-destructive">Incorrect password. Try again.</p>
           )}
           <button
             type="submit"
@@ -185,8 +183,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   }, [scans]);
 
   const browsers = useMemo(
-    () =>
-      Array.from(new Set(scans.map((s) => s.browser).filter(Boolean))) as string[],
+    () => Array.from(new Set(scans.map((s) => s.browser).filter(Boolean))) as string[],
     [scans],
   );
 
@@ -208,7 +205,6 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   return (
     <div className="min-h-screen px-5 py-10 sm:px-8 sm:py-14">
       <div className="mx-auto max-w-6xl">
-
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
@@ -216,12 +212,8 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               <QrCode className="h-5 w-5 text-[color:var(--glow)]" strokeWidth={1.5} />
             </div>
             <div>
-              <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
-                Scan Analytics
-              </h1>
-              <p className="text-xs text-muted-foreground sm:text-sm">
-                Anonymous QR scan activity
-              </p>
+              <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Scan Analytics</h1>
+              <p className="text-xs text-muted-foreground sm:text-sm">Anonymous QR scan activity</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -290,7 +282,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <select
             value={timeFilter}
             onChange={(e) => setTimeFilter(e.target.value as TimeFilter)}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[color:var(--glow)]/50"
+            className="rounded-xl border border-white/10 bg-[oklch(0.20_0.025_295)] px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-[color:var(--glow)]/50 [&>option]:bg-[oklch(0.20_0.025_295)] [&>option]:text-foreground"
           >
             <option value="all">All Time</option>
             <option value="today">Today</option>
@@ -302,7 +294,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <select
             value={deviceFilter}
             onChange={(e) => setDeviceFilter(e.target.value)}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[color:var(--glow)]/50"
+            className="rounded-xl border border-white/10 bg-[oklch(0.20_0.025_295)] px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-[color:var(--glow)]/50 [&>option]:bg-[oklch(0.20_0.025_295)] [&>option]:text-foreground"
           >
             <option value="all">All Devices</option>
             <option value="Mobile">Mobile</option>
@@ -313,7 +305,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <select
             value={browserFilter}
             onChange={(e) => setBrowserFilter(e.target.value)}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[color:var(--glow)]/50"
+            className="rounded-xl border border-white/10 bg-[oklch(0.20_0.025_295)] px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-[color:var(--glow)]/50 [&>option]:bg-[oklch(0.20_0.025_295)] [&>option]:text-foreground"
           >
             <option value="all">All Browsers</option>
             {browsers.map((b) => (
@@ -391,9 +383,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
             </div>
           )}
           {loading && (
-            <div className="py-16 text-center text-sm text-muted-foreground">
-              Loading scans...
-            </div>
+            <div className="py-16 text-center text-sm text-muted-foreground">Loading scans...</div>
           )}
         </div>
 
