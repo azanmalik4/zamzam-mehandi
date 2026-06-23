@@ -45,14 +45,16 @@ function AdminPage() {
     }
   }, []);
 
-  if (!authed) {
-    return <PasswordGate onSuccess={() => setAuthed(true)} />;
-  }
+  if (!authed) return <PasswordGate onSuccess={() => setAuthed(true)} />;
 
-  return <Dashboard onLogout={() => {
-    sessionStorage.removeItem(SESSION_KEY);
-    setAuthed(false);
-  }} />;
+  return (
+    <Dashboard
+      onLogout={() => {
+        sessionStorage.removeItem(SESSION_KEY);
+        setAuthed(false);
+      }}
+    />
+  );
 }
 
 function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
@@ -86,7 +88,6 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
         <p className="mt-1.5 text-sm text-muted-foreground">
           Enter the password to view scan analytics.
         </p>
-
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
           <input
             type="password"
@@ -106,7 +107,9 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
             )}
           />
           {error && (
-            <p className="text-left text-xs text-destructive">Incorrect password. Try again.</p>
+            <p className="text-left text-xs text-destructive">
+              Incorrect password. Try again.
+            </p>
           )}
           <button
             type="submit"
@@ -120,12 +123,35 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
   );
 }
 
+// ── helpers ──────────────────────────────────────────────────────────────────
+
+type TimeFilter = "today" | "week" | "month" | "all";
+
+function getStartDate(filter: TimeFilter): Date | null {
+  const now = new Date();
+  if (filter === "today") {
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  }
+  if (filter === "week") {
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    d.setDate(d.getDate() - d.getDay());
+    return d;
+  }
+  if (filter === "month") {
+    return new Date(now.getFullYear(), now.getMonth(), 1);
+  }
+  return null; // "all"
+}
+
+// ── dashboard ────────────────────────────────────────────────────────────────
+
 function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [scans, setScans] = useState<Scan[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [deviceFilter, setDeviceFilter] = useState("all");
   const [browserFilter, setBrowserFilter] = useState("all");
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>("all");
 
   const fetchScans = async () => {
     setLoading(true);
@@ -142,39 +168,48 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
     fetchScans();
   }, []);
 
+  // Stats always calculated from ALL scans regardless of filters
   const stats = useMemo(() => {
     const now = new Date();
     const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const startOfWeek = new Date(startOfToday);
     startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    const today = scans.filter((s) => new Date(s.scanned_at) >= startOfToday).length;
-    const week = scans.filter((s) => new Date(s.scanned_at) >= startOfWeek).length;
-
-    return { total: scans.length, today, week };
+    return {
+      total: scans.length,
+      today: scans.filter((s) => new Date(s.scanned_at) >= startOfToday).length,
+      week: scans.filter((s) => new Date(s.scanned_at) >= startOfWeek).length,
+      month: scans.filter((s) => new Date(s.scanned_at) >= startOfMonth).length,
+    };
   }, [scans]);
 
   const browsers = useMemo(
-    () => Array.from(new Set(scans.map((s) => s.browser).filter(Boolean))) as string[],
+    () =>
+      Array.from(new Set(scans.map((s) => s.browser).filter(Boolean))) as string[],
     [scans],
   );
 
   const filtered = useMemo(() => {
+    const startDate = getStartDate(timeFilter);
     return scans.filter((s) => {
+      const matchesTime = !startDate || new Date(s.scanned_at) >= startDate;
       const matchesSearch =
         search.trim() === "" ||
         [s.ip, s.country, s.city]
           .filter(Boolean)
-          .some((field) => field!.toLowerCase().includes(search.toLowerCase()));
+          .some((f) => f!.toLowerCase().includes(search.toLowerCase()));
       const matchesDevice = deviceFilter === "all" || s.device === deviceFilter;
       const matchesBrowser = browserFilter === "all" || s.browser === browserFilter;
-      return matchesSearch && matchesDevice && matchesBrowser;
+      return matchesTime && matchesSearch && matchesDevice && matchesBrowser;
     });
-  }, [scans, search, deviceFilter, browserFilter]);
+  }, [scans, search, deviceFilter, browserFilter, timeFilter]);
 
   return (
     <div className="min-h-screen px-5 py-10 sm:px-8 sm:py-14">
       <div className="mx-auto max-w-6xl">
+
+        {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/40 ring-glow">
@@ -194,7 +229,10 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               onClick={fetchScans}
               className="flex h-10 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 text-xs font-medium transition-colors hover:bg-white/[0.06]"
             >
-              <RefreshCw className={cn("h-3.5 w-3.5", loading && "animate-spin")} strokeWidth={1.75} />
+              <RefreshCw
+                className={cn("h-3.5 w-3.5", loading && "animate-spin")}
+                strokeWidth={1.75}
+              />
               Refresh
             </button>
             <button
@@ -207,11 +245,13 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-4">
+        {/* Stats cards — always show full totals */}
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
           {[
             { label: "Total Scans", value: stats.total },
             { label: "Today", value: stats.today },
             { label: "This Week", value: stats.week },
+            { label: "This Month", value: stats.month },
           ].map((s) => (
             <motion.div
               key={s.label}
@@ -230,9 +270,14 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           ))}
         </div>
 
+        {/* Filters */}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          {/* Search */}
           <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" strokeWidth={1.75} />
+            <Search
+              className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+              strokeWidth={1.75}
+            />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -240,6 +285,20 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-[color:var(--glow)]/50"
             />
           </div>
+
+          {/* Time filter — NEW */}
+          <select
+            value={timeFilter}
+            onChange={(e) => setTimeFilter(e.target.value as TimeFilter)}
+            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[color:var(--glow)]/50"
+          >
+            <option value="all">All Time</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+          </select>
+
+          {/* Device filter */}
           <select
             value={deviceFilter}
             onChange={(e) => setDeviceFilter(e.target.value)}
@@ -249,6 +308,8 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
             <option value="Mobile">Mobile</option>
             <option value="Desktop">Desktop</option>
           </select>
+
+          {/* Browser filter */}
           <select
             value={browserFilter}
             onChange={(e) => setBrowserFilter(e.target.value)}
@@ -256,11 +317,14 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           >
             <option value="all">All Browsers</option>
             {browsers.map((b) => (
-              <option key={b} value={b}>{b}</option>
+              <option key={b} value={b}>
+                {b}
+              </option>
             ))}
           </select>
         </div>
 
+        {/* Table */}
         <div className="glass mt-5 overflow-hidden rounded-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
@@ -290,16 +354,24 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                           {new Date(s.scanned_at).toLocaleString()}
                         </span>
                       </td>
-                      <td className="whitespace-nowrap px-5 py-3 font-mono text-xs">{s.ip || "—"}</td>
+                      <td className="whitespace-nowrap px-5 py-3 font-mono text-xs">
+                        {s.ip || "—"}
+                      </td>
                       <td className="whitespace-nowrap px-5 py-3">
                         {[s.city, s.country].filter(Boolean).join(", ") || "—"}
                       </td>
                       <td className="whitespace-nowrap px-5 py-3">
                         <span className="inline-flex items-center gap-1.5">
                           {s.device === "Mobile" ? (
-                            <Smartphone className="h-3.5 w-3.5 text-[color:var(--lavender)]" strokeWidth={1.75} />
+                            <Smartphone
+                              className="h-3.5 w-3.5 text-[color:var(--lavender)]"
+                              strokeWidth={1.75}
+                            />
                           ) : (
-                            <Monitor className="h-3.5 w-3.5 text-[color:var(--lavender)]" strokeWidth={1.75} />
+                            <Monitor
+                              className="h-3.5 w-3.5 text-[color:var(--lavender)]"
+                              strokeWidth={1.75}
+                            />
                           )}
                           {s.device || "—"}
                         </span>
@@ -315,7 +387,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
           {!loading && filtered.length === 0 && (
             <div className="py-16 text-center text-sm text-muted-foreground">
-              No scans match your filters yet.
+              No scans match your filters.
             </div>
           )}
           {loading && (
