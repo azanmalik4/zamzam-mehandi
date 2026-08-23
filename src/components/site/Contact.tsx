@@ -16,7 +16,7 @@ export function Contact() {
   return (
     <section id="contact" className="relative px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-3xl">
-        <SectionHeading eyebrow="Get In Touch" title="We\'d love to hear from you" />
+        <SectionHeading eyebrow="Get In Touch" title="We love to hear from you" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

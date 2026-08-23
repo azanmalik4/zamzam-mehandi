@@ -10,7 +10,9 @@ export function Footer() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/40 ring-1 ring-white/10">
               <Sparkles className="h-4 w-4 text-[color:var(--glow)]" strokeWidth={1.5} />
             </div>
-            <span className="font-display text-sm font-semibold tracking-tight">Zam Zam  Mehandi</span>
+            <span className="font-display text-sm font-semibold tracking-tight">
+              Zam Zam Mehandi
+            </span>
           </div>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Zam Zam Mehandi. Crafted with tradition.
