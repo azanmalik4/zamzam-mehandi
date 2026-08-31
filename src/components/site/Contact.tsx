@@ -6,7 +6,7 @@ const channels = [
   { Icon: Phone, label: "Call", value: "+92 310 1000433", href: "tel:+923101000433" },
   { Icon: MessageCircle, label: "WhatsApp", value: "+92 310 1000433", href: "https://wa.me/923101000433" },
   { Icon: MapPin, label: "Visit", value: "Karachi, Pakistan", href: "#" },
-];-
+];
 
 // This QR code is permanently hardcoded — it encodes https://zamzam-mehandi.vercel.app
 // DO NOT change this SVG path. It is printed in bulk on packaging.
