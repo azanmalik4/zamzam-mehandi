@@ -50,17 +50,17 @@ export function Hero() {
         </div>
 
         <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.35em] text-[color:var(--lavender)]">
-          Zam Zam Mehandi · Est. 2008
+          Zam Zam Mehandi · Est. 2001
         </p>
 
         <h1 className="glow-text text-4xl font-semibold leading-[1.05] sm:text-6xl">
-          Premium Mehandi,
+          From Our Hands to Your Celebrations Rich Color, 
           <br />
-          crafted with tradition.
+          Lasting Beauty, Timeless Tradition.
         </h1>
 
         <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-          A heritage henna house blending pure ingredients with timeless artistry — for color that
+          A heritage henna house blending pure ingredients with timeless artistry for color that
           lasts and skin that breathes.
         </p>
 

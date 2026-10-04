@@ -35,8 +35,7 @@ export function About() {
             About our company
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-            Born from three generations of henna artistry, Zam Zam Mehandi blends
-            traditional Rajasthani craftsmanship with modern formulation science.
+           Since 2001, we have been dedicated to creating mehndi cones with a passion for quality, tradition, and craftsmanship. Every cone we manufacture is the result of careful attention, sincere effort, and years of experience. From thoughtfully developing and refining our formulation to carefully preparing and packaging each cone, we take pride in every detail of the process. For us, mehndi is more than just a product it is a part of celebrations, memories, and moments that deserve to be cherished. From beautiful shaadi celebrations, Eid and festive occasions to family gatherings and special moments, we create our cones to complement every occasion where the elegance of mehndi belongs.
           </p>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Every cone is hand-rolled, every powder triple-sifted, every batch

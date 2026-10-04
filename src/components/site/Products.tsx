@@ -23,7 +23,7 @@ const products = [
   {
     img: p3,
     name: "Organic Henna Powder",
-    desc: "Triple-sifted Rajasthani leaves, lab tested.",
+    desc: "Triple-sifted leaves, lab tested.",
     size: "100 g · Glass Jar",
   },
   {

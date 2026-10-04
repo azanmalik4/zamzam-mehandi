@@ -3,11 +3,11 @@ import { Gem, Clock, Leaf, Package, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 const features = [
-  { Icon: Gem, title: "Premium Quality", desc: "Sourced from the finest Rajasthani henna leaves." },
-  { Icon: Clock, title: "Long-Lasting Color", desc: "Deep stains that mature beautifully for 10+ days." },
-  { Icon: Leaf, title: "Safe Ingredients", desc: "Free from PPD, chemicals and harsh additives." },
-  { Icon: Package, title: "Beautiful Packaging", desc: "Designed to be gifted, made to be cherished." },
-  { Icon: ShieldCheck, title: "A Trusted Brand", desc: "15 years, three generations, one standard." },
+  { Icon: Gem, title: "Deep, Dark Stain", desc: "Rich colour that develops beautifully." },
+  { Icon: Clock, title: "7+ Day Longevity", desc: "Beautiful colour that lasts." },
+  { Icon: Leaf, title: "Safe Ingredients", desc: "Carefully selected & skin-conscious." },
+  { Icon: Package, title: "Premium Packaging", desc: "Elegant, secure, thoughtfully packed and ready to gift." },
+  { Icon: ShieldCheck, title: "Trusted Since 2001 ", desc: "25+ Years of quality & trust." },
 ];
 
 export function WhyUs() {

@@ -11,9 +11,9 @@ import { ThemeToggle } from "@/components/site/ThemeToggle";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Noor Mehandi — Premium Henna, Crafted with Tradition" },
-      { name: "description", content: "Premium mehandi products crafted with quality and tradition. Discover our luxury henna collection." },
-      { property: "og:title", content: "Noor Mehandi — Premium Henna" },
+      { title: "Zam Zam Mehndi | Premium Henna Cones in Karachi & Pakistan" },
+      { name: "description", content: "Zam Zam Mehndi: natural henna cones, bridal mehndi and herbal hair color. Based in Karachi, delivering across Pakistan. Order on WhatsApp." },
+      { property: "og:title", content: "Zam Zam Mehndi Premium Henna" },
       { property: "og:description", content: "Premium mehandi products crafted with quality and tradition." },
     ],
   }),
