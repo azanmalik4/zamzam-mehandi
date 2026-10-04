@@ -54,14 +54,13 @@ export function Hero() {
         </p>
 
         <h1 className="glow-text text-4xl font-semibold leading-[1.05] sm:text-6xl">
-          From Our Hands to Your Celebrations Rich Color, 
+          From Our Hands 
           <br />
-          Lasting Beauty, Timeless Tradition.
+          to Your Celebrations 
         </h1>
 
         <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-          A heritage henna house blending pure ingredients with timeless artistry for color that
-          lasts and skin that breathes.
+          Rich Color, Lasting Beauty, Timeless Tradition.
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
