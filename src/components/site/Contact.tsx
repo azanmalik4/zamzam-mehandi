@@ -46,9 +46,6 @@ export function Contact() {
               <p className="mt-1 text-sm text-muted-foreground">
                 Scan this QR code to explore the Zam Zam Mehandi collection online.
               </p>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-[color:var(--lavender)]">
-                zamzam-mehandi.vercel.app
-              </p>
             </div>
           </div>
 
